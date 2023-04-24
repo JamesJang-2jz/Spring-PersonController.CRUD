@@ -24,7 +24,11 @@ public class PersonService {
     }
 
     public void delete(int id) {
-        personRepository.delete(id);
+        personRepository.deleteById(id);
     }
+
+    // public Person post(int id, String firstName, String lastName){
+
+    // }
 
 }

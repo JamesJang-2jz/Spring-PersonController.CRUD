@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
     @Autowired
     PersonService personService;
 
-    @PostMapping
+    @PostMapping("/{id}/{firstName}/{lastName}")
     public ResponseEntity<Person> createPerson(@RequestBody Person p) {
         return new ResponseEntity<>(personService.save(p), HttpStatus.CREATED);
     }
@@ -46,6 +48,8 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.OK).body(saved);
         }
     }
+
+    @PostMapping("/")
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable int id) {
